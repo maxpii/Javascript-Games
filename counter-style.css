@@ -1,0 +1,30 @@
+body {
+    text-align: center;
+}
+
+#count {
+    font-size: 150px;
+    padding-top:none;
+    margin-top:none;
+    position: relative;
+    margin-bottom: none;
+    top:80px;
+    font-family: fantasy;
+}
+
+
+#inc, #dec, #reset {
+    font-size: 25px;
+    position:relative;
+    top:20px;
+    margin:20px;
+    margin-top: 0px;
+    width: 150px;
+    height:50px;
+    font-family: monospace;
+    color:aliceblue;
+    background-color:rgb(9, 202, 9);
+    border-color:white;
+    border-radius: 20px;
+    border-width: 2px;
+}
