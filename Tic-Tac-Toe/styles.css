@@ -1,6 +1,6 @@
 #heading {
     text-align: center;
-    font-size: 50px;
+    font-size: 70px;
 }
 
 #board {
@@ -18,11 +18,11 @@ tr {
 
 
 button {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     margin: none;
     border:none;
-    /*background-color: white;*/
+    background-color: white;
 }
 
 
@@ -51,10 +51,3 @@ button {
 #bottom-row {
     border-bottom: none;
 }
-
-
-
-
-
-
-

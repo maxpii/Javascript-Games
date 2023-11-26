@@ -1,10 +1,27 @@
 let buttons = document.querySelectorAll("button");
-console.log(buttons);
+let turn = document.getElementById("turn");
 let current_move = "x";
-buttons[0].onclick(randomFunction);
+turn.innerHTML = `Current Turn: ${current_move.toUpperCase()}`;
 
-function randomFunction() {
-    for(let i = 0; i < buttons.length; i ++) {
-        buttons[i].innerHTML = "Hello";
+
+let arr = [
+    [0,0,0],
+    [0,0,0],
+    [0,0,0]
+]
+
+function changeCurrent() {
+    if (current_move === "x") {
+        current_move = "o";
     }
+    else {
+        current_move = "x";
+    }
+}
+
+for(let i = 0; i < buttons.length; i ++) {
+    buttons[i].addEventListener("click",function() {
+        buttons[i].innerHTML = current_move;
+        changeCurrent();
+    });
 }
