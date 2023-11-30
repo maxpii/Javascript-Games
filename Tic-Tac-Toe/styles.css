@@ -1,6 +1,16 @@
-#heading, #turn {
+body {
+    background-color:grey;
+}
+
+#heading,#turn {
     text-align: center;
     font-size: 70px;
+    font-family:monospace;
+}
+
+#turn-text {
+    background-color: rgb(5, 211, 166);
+    color:white;
 }
 
 #board {
@@ -22,7 +32,9 @@ button {
     height: 150px;
     margin: none;
     border:none;
-    background-color: white;
+    background-color: grey;
+    font-family: monospace;
+    font-size:35px;
 }
 
 

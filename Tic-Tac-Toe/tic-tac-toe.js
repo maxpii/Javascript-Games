@@ -1,5 +1,5 @@
 let buttons = document.querySelectorAll("button");
-let turn = document.getElementById("turn");
+let turn = document.getElementById("turn-text");
 let current_move = "x";
 turn.innerHTML = `Current Turn: ${current_move.toUpperCase()}`;
 let gameEnded = false;
@@ -24,11 +24,12 @@ for(let i = 0; i < buttons.length; i ++) {
     buttons[i].addEventListener("click",() => {
         if (!gameEnded) {
         
-        changeArray(buttons[i]);
-        console.log(arr);
-        buttons[i].innerHTML = current_move;
-        checkTest();
-        changeCurrent();
+        var signal = changeArray(buttons[i]);
+        check();
+        if (signal) {
+            buttons[i].innerHTML = current_move;
+            changeCurrent();
+        }
         turn.innerHTML = `Current Turn: ${current_move.toUpperCase()}`;
         }
         if (gameEnded) {
@@ -46,7 +47,13 @@ for(let i = 0; i < buttons.length; i ++) {
 
 function changeArray(button) {
     var index = button.id - 1;
+    if (arr[Math.floor(index/3)][index%3] === 0) {
     arr[Math.floor(index/3)][index%3] = current_move;
+    return true;
+    }
+    else {
+        return false;
+    }
 }
 function isFull() {
     for (let i = 0; i < arr.length; i ++) {
@@ -95,7 +102,7 @@ function isFull() {
    
 // }
 
-function checkTest() {
+function check() {
     if (arr[0][0] === current_move && arr[0][1] === current_move && arr[0][2] === current_move) {
         gameEnded = true;
         gameWinner = current_move;
