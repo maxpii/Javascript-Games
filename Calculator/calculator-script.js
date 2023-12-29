@@ -1,5 +1,9 @@
 let master_string = "";
 let signs = "+-*/%=";
+let current_index = 0;
+let cache = "";
+let current_sign = "";
+let first_num = 0;
 
 // heading 
 let heading = document.querySelector('#heading');
@@ -138,9 +142,28 @@ equals.addEventListener("click", () => {
     doStuff();
     //console.log(master_string);
 });
+
 // that was exhaustive
+
 function doStuff () {
-    if (signs.includes(master_string.charAt(0))) {
-        screen.innerHTML = "Can't put a sign right now!";
+    while (current_index < master_string.length) {
+        var current  = master_string.charAt(current_index);
+
+        if (current === "C") {  
+            cache = "";
+            screen.innerHTML = "0";
+        }
+        else if (signs.includes(current) === false) {
+            cache = cache + current
+            screen.innerHTML = cache;
+        }
+        else if (signs.includes(current)) {
+            current_sign = current;
+            first_num = parseInt(cache);
+            cache = "";
+            screen.innerHTML = "0";
+        }
+        current_index ++; 
+        
     }
 }
