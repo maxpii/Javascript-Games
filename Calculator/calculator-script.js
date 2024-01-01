@@ -1,9 +1,13 @@
+// setting up variables
+
 let master_string = "";
 let signs = "+-*/%=";
 let current_index = 0;
 let cache = "";
 let current_sign = "";
 let first_num = 0;
+let second_num = 0;
+
 
 // heading 
 let heading = document.querySelector('#heading');
@@ -143,27 +147,74 @@ equals.addEventListener("click", () => {
     //console.log(master_string);
 });
 
-// that was exhaustive
+// that was repetitive
 
 function doStuff () {
+    // iterating over list of commands
     while (current_index < master_string.length) {
+        // current character
         var current  = master_string.charAt(current_index);
 
+        // if it is the C button we reset to everything back
         if (current === "C") {  
             cache = "";
             screen.innerHTML = "0";
+            first_num = 0;
+            second_num = 0;
+            current_sign = "";
         }
-        else if (signs.includes(current) === false) {
-            cache = cache + current
-            screen.innerHTML = cache;
+
+        // if it is an equals sign, we compute the sum/difference/product/quotient/remainder
+        // of the two numbers
+        // Also reset everything back
+        else if (current === "=") {
+            second_num = parseFloat(cache);
+            screen.innerHTML = performOperation().toString();
+            first_num = 0;
+            second_num = 0;
+            cache = "";
+            current_sign = "";
         }
+        
+        // if the user inputed a sign, we save our first number 
+        // the screen displays "enter a number"
         else if (signs.includes(current)) {
             current_sign = current;
-            first_num = parseInt(cache);
+            first_num = parseFloat(cache);
             cache = "";
-            screen.innerHTML = "0";
+            screen.innerHTML = "enter a number";
         }
+
+        // if the user is continually entering numbers, we just append them to our cache
+        // our cache is basically storing numbers until a sign is entered
+        else {
+            cache = cache + current;
+            screen.innerHTML = cache;
+        }
+
+        // increment the current index so we keep looping over our master_string
+        // the master_string is the string of commands that the user inputs
         current_index ++; 
         
+    }
+}
+function performOperation() {
+    if (current_sign === "+") {
+        return first_num+second_num;
+    }
+    else if (current_sign === "-") {
+        return first_num - second_num;
+    }
+    else if (current_sign === "*") {
+        return first_num * second_num;
+    }
+    else if (current_sign === "/") {
+        return first_num/second_num;
+    }
+    else if (current_sign === "%") {
+        return first_num % second_num;
+    }
+    else {
+        return "";
     }
 }
