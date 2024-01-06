@@ -5,8 +5,8 @@ let signs = "+-*/%=";
 let current_index = 0;
 let cache = "";
 let current_sign = "";
-let first_num = 0;
-let second_num = 0;
+let first_num = "undefined";
+let second_num = "undefined";
 
 
 // heading 
@@ -159,8 +159,8 @@ function doStuff () {
         if (current === "C") {  
             cache = "";
             screen.innerHTML = "0";
-            first_num = 0;
-            second_num = 0;
+            first_num = "undefined";
+            second_num = "undefined";
             current_sign = "";
         }
 
@@ -170,8 +170,8 @@ function doStuff () {
         else if (current === "=") {
             second_num = parseFloat(cache);
             screen.innerHTML = performOperation().toString();
-            first_num = 0;
-            second_num = 0;
+            first_num = "undefined";
+            second_num = "undefined";
             cache = "";
             current_sign = "";
         }
@@ -182,14 +182,19 @@ function doStuff () {
             current_sign = current;
             first_num = parseFloat(cache);
             cache = "";
-            screen.innerHTML = "enter a number";
+            screen.innerHTML = screen.innerHTML + current_sign;
         }
 
         // if the user is continually entering numbers, we just append them to our cache
         // our cache is basically storing numbers until a sign is entered
         else {
             cache = cache + current;
-            screen.innerHTML = cache;
+            if (first_num !== "undefined") {
+                screen.innerHTML = first_num + current_sign + cache; 
+            }
+            else {
+                screen.innerHTML = cache;   
+            }
         }
 
         // increment the current index so we keep looping over our master_string
@@ -209,7 +214,7 @@ function performOperation() {
         return first_num * second_num;
     }
     else if (current_sign === "/") {
-        return first_num/second_num;
+        return parseFloat(first_num/second_num).toFixed(5);
     }
     else if (current_sign === "%") {
         return first_num % second_num;
